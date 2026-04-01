@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DomiTechPC Assistance – Dépannage informatique et développement web à Montluçon et alentours. Intervention rapide à domicile ou à distance.">
+<title>DomiTechPC Assistance – Dépannage informatique & Dev Web</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --border: rgba(99,179,237,0.12);
+    --cyan: #38bdf8;
+    --cyan-dim: rgba(56,189,248,0.07);
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --r: 12px;
+    --r2: 8px;
+    --wrap: 1400px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+    pointer-events: none; z-index: 999;
+  }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+  .section-band { width: 100%; padding: 72px 0; }
+  .section-band--alt {
+    background: rgba(255,255,255,0.018);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* NAV */
+  .nav-outer {
+    width: 100%; position: sticky; top: 0; z-index: 280;
+    background: rgba(10,14,26,0.92); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 28px; max-width: var(--wrap); margin: 0 auto;
+  }
+  .logo {
+    font-family: var(--mono); font-size: 14px; color: var(--cyan);
+    display: flex; align-items: center; gap: 8px; text-decoration: none;
+  }
+  .logo-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.7)} }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-family: var(--mono); font-size: 12px; color: var(--text2); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 6px;
+    z-index: 300; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--cyan); border-radius: 2px;
+    transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .25s, width .3s;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE MENU */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 250;
+    background: rgba(10,14,26,0.97); backdrop-filter: blur(24px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 0;
+    opacity: 0; transform: translateY(-16px);
+    transition: opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .mobile-menu.open { opacity: 1; transform: translateY(0); }
+  .mobile-menu a {
+    font-family: var(--mono); font-size: 26px; color: var(--text2);
+    text-decoration: none; letter-spacing: 3px; padding: 18px 0;
+    position: relative; display: inline-block;
+    opacity: 0; transform: translateY(18px);
+    transition: color .2s, opacity .35s, transform .35s;
+  }
+  .mobile-menu a::after {
+    content: ''; position: absolute; bottom: 14px; left: 0;
+    width: 0; height: 1px; background: var(--cyan);
+    transition: width .3s cubic-bezier(.4,0,.2,1);
+  }
+  .mobile-menu a:hover { color: var(--cyan); }
+  .mobile-menu a:hover::after { width: 100%; }
+  .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+  .mobile-menu.open a:nth-child(2) { transition-delay: .05s; }
+  .mobile-menu.open a:nth-child(3) { transition-delay: .11s; }
+  .mobile-menu.open a:nth-child(4) { transition-delay: .17s; }
+  .mobile-menu.open a:nth-child(5) { transition-delay: .23s; }
+  .mobile-close {
+    position: absolute; top: 22px; right: 22px;
+    background: none; border: 1px solid var(--border); border-radius: 50%;
+    width: 42px; height: 42px; cursor: pointer; color: var(--cyan);
+    font-size: 20px; display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s;
+  }
+  .mobile-close:hover { background: var(--cyan-dim); border-color: var(--cyan); }
+
+  /* HERO */
+  .hero { padding: 80px 0 64px; }
+  .hero-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--cyan);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 22px; display: flex; align-items: center; gap: 8px;
+  }
+  .hero-tag::before { content: '//'; opacity: .45; }
+  h1 {
+    font-family: var(--mono); font-size: clamp(30px,5.5vw,54px);
+    font-weight: 700; line-height: 1.1; margin-bottom: 22px; color: var(--text);
+  }
+  h1 span { color: var(--cyan); }
+  .hero-desc { font-size: 16px; color: var(--text2); max-width: 520px; margin-bottom: 38px; line-height: 1.75; }
+  .cta-group { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--cyan); color: #0a0e1a; border: none;
+    padding: 13px 30px; border-radius: var(--r2);
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: transform .15s, box-shadow .15s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(56,189,248,.28); }
+  .btn-ghost {
+    background: transparent; color: var(--text2); border: 1px solid var(--border);
+    padding: 13px 24px; border-radius: var(--r2);
+    font-family: var(--mono); font-size: 13px; cursor: pointer;
+    transition: border-color .2s, color .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+  .status-bar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r2); padding: 11px 20px; margin-top: 44px;
+    font-family: var(--mono); font-size: 12px; color: var(--text3);
+  }
+  .status-item { display: flex; align-items: center; gap: 7px; }
+  .dot-green { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 3s ease-in-out infinite; }
+  .dot-amber { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; }
+
+  .section-label {
+    font-family: var(--mono); font-size: 11px; color: var(--cyan);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* BENTO */
+  .bento { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 26px;
+    transition: border-color .25s, transform .2s;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--cyan-dim); opacity: 0; transition: opacity .25s; pointer-events: none;
+  }
+  .card:hover { border-color: rgba(56,189,248,.38); transform: translateY(-2px); }
+  .card:hover::before { opacity: 1; }
+  .card-icon { font-size: 22px; margin-bottom: 14px; display: block; }
+  .card-title { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 9px; }
+  .card-desc { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .span-2 { grid-column: span 2; }
+  .card-featured { background: linear-gradient(135deg,#0f1f3a,#0d2240); border-color: rgba(56,189,248,.3); }
+  .card-featured .card-title { color: var(--cyan); font-size: 17px; }
+  .card-accent { border-color: rgba(52,211,153,.22); background: rgba(52,211,153,.04); }
+  .card-number .big-num { font-family: var(--mono); font-size: 44px; font-weight: 700; color: var(--cyan); line-height: 1; margin-bottom: 8px; }
+
+  .terminal {
+    background: #070d1a; border: 1px solid var(--border); border-radius: var(--r2);
+    padding: 18px; font-family: var(--mono); font-size: 12px; line-height: 1.9; color: var(--text2);
+  }
+  .t-prompt { color: var(--cyan); }
+  .t-ok { color: var(--green); }
+  .t-warn { color: var(--amber); }
+  .cursor-blink { display: inline-block; width: 8px; height: 14px; background: var(--cyan); vertical-align: middle; animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--text3); letter-spacing: .5px; }
+  .tag-cyan { border-color: rgba(56,189,248,.4); color: var(--cyan); }
+  .tag-green { border-color: rgba(52,211,153,.4); color: var(--green); }
+
+  /* TARIFS */
+  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .price-row:last-child { border-bottom: none; }
+  .service-name { color: var(--text2); }
+  .service-price { font-family: var(--mono); color: var(--cyan); font-weight: 700; }
+
+  /* AVIS */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  .review-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+    transition: border-color .2s, transform .2s;
+  }
+  .review-card:hover { border-color: rgba(56,189,248,.3); transform: translateY(-2px); }
+  .review-stars { color: var(--amber); font-size: 13px; letter-spacing: 2px; }
+  .review-text { font-size: 13px; color: var(--text2); line-height: 1.7; flex: 1; font-style: italic; }
+  .review-text::before { content: '"'; color: var(--cyan); font-size: 20px; font-style: normal; line-height: 0; vertical-align: -4px; margin-right: 3px; }
+  .review-author { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--cyan-dim); border: 1px solid rgba(56,189,248,.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--cyan); flex-shrink: 0;
+  }
+  .review-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .review-via { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-top: 2px; }
+  .review-cta {
+    margin-top: 32px; text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 30px;
+  }
+  .review-cta p { font-size: 14px; color: var(--text2); margin-bottom: 18px; }
+  .btn-google {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; border: 1px solid rgba(56,189,248,.35);
+    color: var(--cyan); padding: 11px 24px; border-radius: var(--r2);
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    text-decoration: none; transition: background .2s, border-color .2s;
+  }
+  .btn-google:hover { background: var(--cyan-dim); border-color: var(--cyan); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .contact-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+    padding: 22px 26px; display: flex; align-items: center; gap: 16px;
+    transition: border-color .2s, transform .2s; text-decoration: none;
+  }
+  .contact-item:hover { border-color: rgba(56,189,248,.42); transform: translateY(-2px); }
+  .contact-icon { font-size: 22px; }
+  .contact-label { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-bottom: 4px; letter-spacing: 1px; }
+  .contact-value { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  /* EMAIL COPY */
+  .email-copy-inner { display: flex; align-items: center; gap: 6px; }
+  .email-copy-icon { font-size: 11px; opacity: 0; transition: opacity .2s; color: var(--cyan); font-family: var(--mono); }
+  .contact-item:hover .email-copy-icon { opacity: 1; }
+  .copy-toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--green); color: #0a0e1a; padding: 10px 22px;
+    border-radius: var(--r2); font-family: var(--mono); font-size: 13px; font-weight: 700;
+    opacity: 0; transition: opacity .3s, transform .3s; z-index: 500; pointer-events: none;
+  }
+  .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* FORM */
+  .contact-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 32px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 1px; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: #070d1a; border: 1px solid var(--border); border-radius: var(--r2);
+    padding: 11px 14px; font-family: var(--sans); font-size: 14px; color: var(--text);
+    outline: none; transition: border-color .2s; width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--cyan); }
+  .form-group select option { background: #111827; }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-full { grid-column: span 2; }
+
+  /* FORM FEEDBACK */
+  #form-message {
+    display: none; margin-top: 14px; padding: 12px 18px;
+    border-radius: var(--r2); font-family: var(--mono); font-size: 13px; border: 1px solid transparent;
+  }
+  #form-message.success { background: rgba(52,211,153,.08); border-color: rgba(52,211,153,.3); color: var(--green); }
+  #form-message.error { background: rgba(251,191,36,.06); border-color: rgba(251,191,36,.3); color: var(--amber); }
+
+  /* SUBMIT ANIMATION */
+  #submit-btn { width: 100%; text-align: center; position: relative; overflow: hidden; }
+  #submit-btn .btn-text { transition: opacity .2s; }
+  #submit-btn.sending .btn-text { opacity: 0; }
+  #submit-btn .btn-loader {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    gap: 6px; opacity: 0; transition: opacity .2s;
+  }
+  #submit-btn.sending .btn-loader { opacity: 1; }
+  .loader-dot { width: 6px; height: 6px; border-radius: 50%; background: #0a0e1a; animation: loaderBounce 1s ease-in-out infinite; }
+  .loader-dot:nth-child(2) { animation-delay: .15s; }
+  .loader-dot:nth-child(3) { animation-delay: .3s; }
+  @keyframes loaderBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* FOOTER */
+  .footer-outer { width: 100%; border-top: 1px solid var(--border); padding: 32px 0; }
+  footer {
+    max-width: var(--wrap); margin: 0 auto; padding: 0 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; font-family: var(--mono); font-size: 11px; color: var(--text3);
+  }
+  footer .footer-links { display: flex; gap: 20px; }
+  footer a { color: var(--text3); text-decoration: none; transition: color .2s; }
+  footer a:hover { color: var(--cyan); }
+
+  /* FADE UP */
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .55s, transform .55s; }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .bento { grid-template-columns: repeat(3,1fr); }
+    .reviews-grid { grid-template-columns: repeat(3,1fr); }
+  }
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 16px 20px; }
+    .wrap { padding: 0 18px; }
+    h1 { font-size: 28px; }
+    .section-band { padding: 48px 0; }
+    .hero { padding: 52px 0 44px; }
+    .status-bar { gap: 10px; }
+    .bento { grid-template-columns: 1fr 1fr; }
+    .bento[style] { grid-template-columns: 1fr !important; }
+    .bento[style] .card { grid-column: 1 / -1 !important; }
+    .span-2 { grid-column: span 2; }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-form { padding: 20px 16px; }
+    .form-grid { grid-template-columns: 1fr !important; }
+    .form-group { grid-column: 1 / -1 !important; }
+    .form-full { grid-column: 1 / -1 !important; }
+    footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .footer-links { gap: 14px; flex-wrap: wrap; }
+  }
+  @media (max-width: 440px) {
+    .bento { grid-template-columns: 1fr; }
+    .span-2 { grid-column: span 1; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 24px; }
+  }
+
+  /* ===== COOKIE BANNER ===== */
+  #cookieBanner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+    background: rgba(17,24,39,0.97); backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(99,179,237,0.18);
+    padding: 18px 24px;
+    animation: slideUp .4s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .cookie-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .cookie-text { display: flex; align-items: flex-start; gap: 14px; flex: 1; min-width: 240px; }
+  .cookie-icon-big { font-size: 22px; margin-top: 2px; flex-shrink: 0; }
+  .cookie-text strong { font-family: var(--mono); font-size: 13px; color: var(--text); display: block; margin-bottom: 4px; }
+  .cookie-text p { font-size: 12px; color: var(--text2); margin: 0 0 4px; }
+  .cookie-text a { font-size: 12px; color: var(--cyan); text-decoration: none; }
+  .cookie-text a:hover { text-decoration: underline; }
+  .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+  .cookie-btn-accept {
+    background: var(--cyan); color: #0a0e1a; border: none;
+    padding: 9px 22px; border-radius: var(--r2);
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: transform .15s, box-shadow .15s;
+  }
+  .cookie-btn-accept:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(56,189,248,.3); }
+  .cookie-btn-refuse {
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border);
+    padding: 9px 18px; border-radius: var(--r2);
+    font-family: var(--mono); font-size: 12px;
+    cursor: pointer; transition: border-color .2s, color .2s;
+  }
+  .cookie-btn-refuse:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ===== MODALS MENTIONS / CGV ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 8000;
+    background: rgba(5,8,16,0.88); backdrop-filter: blur(18px);
+    overflow-y: auto; padding: 40px 20px;
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal-box {
+    background: var(--surface); border: 1px solid rgba(99,179,237,0.18);
+    border-radius: var(--r); max-width: 780px; width: 100%;
+    padding: 40px; position: relative; margin: auto;
+    animation: modalIn .35s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes modalIn { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: none; } }
+  .modal-close {
+    position: absolute; top: 18px; right: 18px;
+    background: none; border: 1px solid var(--border); border-radius: 50%;
+    width: 38px; height: 38px; cursor: pointer; color: var(--cyan);
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s;
+  }
+  .modal-close:hover { background: var(--cyan-dim); border-color: var(--cyan); }
+  .modal-tag { font-family: var(--mono); font-size: 11px; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .modal-tag::before { content: "// "; opacity: .45; }
+  .modal-h1 { font-family: var(--mono); font-size: clamp(18px,3vw,26px); font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .modal-date { font-family: var(--mono); font-size: 11px; color: var(--text3); margin-bottom: 32px; }
+  .modal-toc { background: rgba(255,255,255,0.025); border: 1px solid var(--border); border-radius: var(--r2); padding: 18px 22px; margin-bottom: 28px; }
+  .modal-toc-title { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .modal-toc a { display: block; font-family: var(--mono); font-size: 11px; color: var(--text2); text-decoration: none; padding: 4px 0; transition: color .2s; }
+  .modal-toc a:hover { color: var(--cyan); }
+  .modal-toc a::before { content: "→ "; opacity: .4; }
+  .modal-section { margin-bottom: 28px; padding: 22px 24px; background: rgba(255,255,255,0.018); border: 1px solid var(--border); border-radius: var(--r2); }
+  .modal-section-title { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+  .modal-section-title::before { content: "▸ "; opacity: .6; }
+  .modal-section p { color: var(--text2); font-size: 13px; line-height: 1.75; margin-bottom: 10px; }
+  .modal-section p:last-child { margin-bottom: 0; }
+  .modal-section strong { color: var(--text); }
+  .modal-section a { color: var(--cyan); text-decoration: none; }
+  .modal-section a:hover { text-decoration: underline; }
+  .modal-section ul { padding-left: 18px; color: var(--text2); font-size: 13px; margin-bottom: 10px; }
+  .modal-section ul li { margin-bottom: 5px; line-height: 1.65; }
+  .tarif-grid-m { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 10px; margin-top: 14px; }
+  .tarif-card-m { background: rgba(56,189,248,0.04); border: 1px solid var(--border); border-radius: var(--r2); padding: 14px 16px; }
+  .tarif-label-m { font-family: var(--mono); font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+  .tarif-price-m { font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--cyan); }
+  .tarif-desc-m { font-size: 11px; color: var(--text2); margin-top: 3px; }
+  .alert-box-m { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); border-radius: var(--r2); padding: 12px 16px; margin-top: 12px; font-size: 12px; color: var(--amber); }
+
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Fermer">✕</button>
+  <a href="#services" onclick="closeMobileMenu()">services</a>
+  <a href="#tarifs" onclick="closeMobileMenu()">tarifs</a>
+  <a href="#avis" onclick="closeMobileMenu()">avis</a>
+  <a href="#contact" onclick="closeMobileMenu()">contact</a>
+</div>
+
+<!-- TOAST EMAIL -->
+<div class="copy-toast" id="copyToast">✓ E-mail copié !</div>
+
+<!-- NAV -->
+<div class="nav-outer">
+  <nav>
+    <a href="#" class="logo"><div class="logo-dot"></div>DomiTechPC Assistance</a>
+    <div class="nav-links">
+      <a href="#services">services</a>
+      <a href="#tarifs">tarifs</a>
+      <a href="#avis">avis</a>
+      <a href="#contact">contact</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="wrap">
+  <section class="hero fade-up">
+    <div class="hero-tag">Assistance informatique &amp; dev web</div>
+    <h1>Votre PC en<br><span>bonne santé.</span><br>Votre site,<br><span>en ligne.</span></h1>
+    <p class="hero-desc">Dépannage rapide, maintenance, et développement web sur-mesure. Je m'occupe de votre informatique pendant que vous vous occupez de votre métier.</p>
+    <div class="cta-group">
+      <a href="#contact" class="btn-primary">→ Demander un devis</a>
+      <a href="#services" class="btn-ghost">Voir les services</a>
+    </div>
+    <div class="status-bar">
+      <div class="status-item"><div class="dot-green"></div> Disponible aujourd'hui</div>
+      <div class="status-item"><div class="dot-green"></div> Blois &amp; alentours</div>
+      <div class="status-item"><div class="dot-green"></div> Télémaintenance possible</div>
+      <div class="status-item"><div class="dot-amber"></div> SIRET&nbsp;: 99059412900019</div>
+    </div>
+  </section>
+</div>
+
+<!-- SERVICES -->
+<div class="section-band" id="services">
+  <div class="wrap fade-up">
+    <div class="section-label">// services</div>
+    <div class="bento">
+      <div class="card card-featured span-2">
+        <span class="card-icon">🖥️</span>
+        <div class="card-title">Dépannage informatique</div>
+        <p class="card-desc">PC lent, virus, écran bleu, panne matérielle ou logicielle — j'interviens rapidement à domicile ou à distance pour remettre votre machine sur pied.</p>
+        <div class="tags">
+          <span class="tag tag-cyan">Windows 10/11</span>
+          <span class="tag tag-cyan">macOS</span>
+          <span class="tag">Réseau</span>
+          <span class="tag">Imprimantes</span>
+        </div>
+      </div>
+      <div class="card card-number">
+        <div class="big-num">2h</div>
+        <div class="card-title">Délai moyen</div>
+        <p class="card-desc">D'intervention pour les urgences informatiques.</p>
+      </div>
+      <div class="card card-accent">
+        <span class="card-icon">🌐</span>
+        <div class="card-title">Développement web</div>
+        <p class="card-desc">Sites vitrines, landing pages, refonte graphique. Du code propre, rapide et accessible.</p>
+        <div class="tags">
+          <span class="tag tag-green">HTML/CSS</span>
+          <span class="tag tag-green">JavaScript</span>
+        </div>
+      </div>
+      <div class="card span-2">
+        <div class="terminal">
+          <div><span class="t-prompt">$</span> domitechpc --scan</div>
+          <div class="t-ok">✓ Antivirus à jour</div>
+          <div class="t-ok">✓ Mises à jour Windows installées</div>
+          <div class="t-warn">⚠ Disque dur : 89% plein → nettoyage recommandé</div>
+          <div class="t-ok">✓ Connexion réseau optimisée</div>
+          <div><span class="t-prompt">$</span> fix --auto<span class="cursor-blink"></span></div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔧</span>
+        <div class="card-title">Maintenance</div>
+        <p class="card-desc">Contrat mensuel et annuel disponible.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📡</span>
+        <div class="card-title">Réseau &amp; Wi-Fi</div>
+        <p class="card-desc">Configuration de box, répéteurs Wi-Fi.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💾</span>
+        <div class="card-title">Récupération données</div>
+        <p class="card-desc">Fichiers perdus, disque endommagé — intervention pour récupérer vos données précieuses.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔒</span>
+        <div class="card-title">Sécurité</div>
+        <p class="card-desc">Suppression de virus et sécurisation de vos accès en ligne.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TARIFS -->
+<div class="section-band section-band--alt" id="tarifs">
+  <div class="wrap fade-up">
+    <div class="section-label">// tarifs</div>
+    <div class="bento" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+      <div class="card" style="grid-column:span 2;">
+        <div class="card-title" style="margin-bottom:18px;">Dépannage &amp; Maintenance</div>
+        <div class="price-row"><span class="service-name">Télémaintenance</span><span class="service-price">à partir de 20€</span></div>
+        <div class="price-row"><span class="service-name">Intervention à domicile</span><span class="service-price">sur devis</span></div>
+        <div class="price-row"><span class="service-name">Nettoyage complet PC</span><span class="service-price">30€</span></div>
+        <div class="price-row"><span class="service-name">Réinstallation Windows</span><span class="service-price">40€</span></div>
+        <div class="price-row"><span class="service-name">Contrat maintenance annuel</span><span class="service-price">sur devis</span></div>
+      </div>
+      <div class="card" style="grid-column:span 2;">
+        <div class="card-title" style="margin-bottom:18px;">Développement web</div>
+        <div class="price-row"><span class="service-name">Achat site vitrine</span><span class="service-price">à partir de 400€</span></div>
+        <div class="price-row"><span class="service-name">Lancement de site</span><span class="service-price">à partir de 150€</span></div>
+        <div class="price-row"><span class="service-name">Refonte graphique</span><span class="service-price">sur devis</span></div>
+        <div class="price-row"><span class="service-name">Maintenance mensuelle</span><span class="service-price">dès 19€/mois</span></div>
+        <div class="price-row"><span class="service-name">Hébergement &amp; domaine</span><span class="service-price">sur devis</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AVIS -->
+<div class="section-band" id="avis">
+  <div class="wrap fade-up">
+    <div class="section-label">// avis clients</div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Un problème avec votre PC, faites appel à Sylvain, il trouvera une solution et saura vous conseiller. Les tarifs sont raisonnables. Je recommande vivement.</p>
+        <div class="review-author">
+          <div class="review-avatar">F</div>
+          <div><div class="review-name">Flo</div><div class="review-via">⭐ Google · St-Laurent-Nouan</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Jeune homme très compétent dans son domaine. Il a su diagnostiquer la panne et a été de très bon conseils. Les prix sont très raisonnables. Je referai appel à ses services si besoin et le recommande vivement.</p>
+        <div class="review-author">
+          <div class="review-avatar">SM</div>
+          <div><div class="review-name">Stephane M</div><div class="review-via">⭐ Google · St-Laurent-Nouan</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Très bonne expérience ! Jeune professionnel sérieux et compétent. Travail soigné, rapide et à un prix honnête. Je recommande sans hésiter 👍</p>
+        <div class="review-author">
+          <div class="review-avatar">OS</div>
+          <div><div class="review-name">Olivier S.</div><div class="review-via">⭐ Google · Blois</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Très bon travail, j'ai pu récupérer mes photos et mon pc remarche je suis ravie ! Merci encore</p>
+        <div class="review-author">
+          <div class="review-avatar">LD</div>
+          <div><div class="review-name">Laura D.</div><div class="review-via">⭐ Google · Montluçon</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">J'ai fais réparer mon PC portable qui était super lent, il marche aujourd'hui nickel ! Technicien très pro et pas cher, je recommande !</p>
+        <div class="review-author">
+          <div class="review-avatar">EB</div>
+          <div><div class="review-name">Emma B.</div><div class="review-via">⭐ Google · Montluçon</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Installation d'une box Wi-Fi, imprimante partagée. Tout a été très rapide. Top !</p>
+        <div class="review-author">
+          <div class="review-avatar">AL</div>
+          <div><div class="review-name">Antoine L.</div><div class="review-via">⭐ Google · Orléans</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="review-cta">
+      <p>Vous avez déjà fait appel à DomiTechPC ? Votre avis compte énormément 🙏</p>
+      <a href="https://share.google/ADygFLXDbCgqtInHu" target="_blank" rel="noopener" class="btn-google">
+        <svg width="16" height="16" viewBox="0 0 48 48">
+          <path d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z" fill="#FFC107"/>
+          <path d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.1 8 2.9l5.7-5.7C34.6 6.1 29.6 4 24 4c-7.7 0-14.3 4.3-17.7 10.7z" fill="#FF3D00"/>
+          <path d="M24 44c5.5 0 10.4-2 14.1-5.3l-6.5-5.5C29.6 35 26.9 36 24 36c-5.3 0-9.7-3.3-11.3-8H6.1C9.5 39.6 16.2 44 24 44z" fill="#4CAF50"/>
+          <path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4-4 5.2l6.5 5.5C37.6 39.1 44 34 44 24c0-1.2-.1-2.4-.4-3.5z" fill="#1976D2"/>
+        </svg>
+        Laisser un avis sur Google
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section-band section-band--alt" id="contact">
+  <div class="wrap fade-up">
+    <div class="section-label">// contact</div>
+    <div class="contact-grid">
+      <a href="tel:+33609227741" class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div><div class="contact-label">TÉLÉPHONE</div><div class="contact-value">06 09 22 77 41</div></div>
+      </a>
+      <div class="contact-item" onclick="copyEmail()" title="Cliquer pour copier" style="cursor:pointer;">
+        <span class="contact-icon">✉️</span>
+        <div style="flex:1;">
+          <div class="contact-label">EMAIL</div>
+          <div class="email-copy-inner">
+            <div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89c8c889bd6998b8b918b8c99969b9db89f95999194d69b9795">[email&#160;protected]</a></div>
+            <span class="email-copy-icon">📋 copier</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-item" style="cursor:default;">
+        <span class="contact-icon">📍</span>
+        <div><div class="contact-label">ZONE D'INTERVENTION</div><div class="contact-value">Blois, Orléans, Tours, Montluçon</div></div>
+      </div>
+      <div class="contact-item" style="cursor:default;">
+        <span class="contact-icon">🕐</span>
+        <div><div class="contact-label">DISPONIBILITÉ</div><div class="contact-value">Lun–Dim · 8h–22h</div></div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="card-title" style="margin-bottom:22px;font-size:15px;">✉ Envoyer un message</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="prenom">NOM &amp; PRÉNOM *</label>
+          <input type="text" id="prenom" name="prenom" placeholder="Jean Dupont" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="telephone">TÉLÉPHONE</label>
+          <input type="tel" id="telephone" name="telephone" placeholder="06 XX XX XX XX" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label for="email">EMAIL *</label>
+          <input type="email" id="email" name="email" placeholder="vous@exemple.fr" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="prestation">SERVICE SOUHAITÉ</label>
+          <select id="prestation" name="prestation">
+            <option value="">Choisir...</option>
+            <option>Dépannage informatique</option>
+            <option>Développement web</option>
+            <option>Maintenance</option>
+            <option>Réseau &amp; Wi-Fi</option>
+            <option>Récupération de données</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="commune">COMMUNE</label>
+          <input type="text" id="commune" name="commune" placeholder="Votre ville">
+        </div>
+        <div class="form-group form-full">
+          <label for="message">VOTRE MESSAGE</label>
+          <textarea id="message" name="message" placeholder="Décrivez votre problème ou votre projet..."></textarea>
+        </div>
+      </div>
+      <button type="button" id="submit-btn" class="btn-primary" onclick="envoyerFormulaire()">
+        <span class="btn-text">→ Envoyer ma demande</span>
+        <span class="btn-loader">
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+        </span>
+      </button>
+      <div id="form-message"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-outer">
+  <footer>
+    <div>SIRET 99059412900019</div>
+    <p>&copy; 2026 DomiTechPC Assistance - Expert en Dépannage Informatique.</p>
+    <div class="footer-links">
+      <a href="#" onclick="openModal('modalMentions'); return false;">Mentions légales</a>
+      <a href="#" onclick="openModal('modalCGV'); return false;">CGV</a>
+      <a href="#" onclick="resetCookieConsent(); return false;">Cookies</a>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="display:none;" role="dialog" aria-label="Gestion des cookies">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <span class="cookie-icon-big">🍪</span>
+      <div>
+        <strong>Ce site utilise des cookies</strong>
+        <p>Cookies techniques et Google Fonts uniquement. Aucun tracking ni publicité.</p>
+        <a href="#" onclick="openModal('modalMentions'); hideCookieBanner(); return false;">En savoir plus</a>
+      </div>
+    </div>
+    <div class="cookie-actions">
+      <button class="cookie-btn-accept" onclick="acceptCookies()">Accepter</button>
+      <button class="cookie-btn-refuse" onclick="refuseCookies()">Refuser</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MENTIONS LÉGALES -->
+<div class="modal-overlay" id="modalMentions" onclick="closeModalOutside(event, 'modalMentions')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalMentions')">✕</button>
+    <div class="modal-tag">Légal</div>
+    <div class="modal-h1">Mentions Légales &amp;<br>Politique de Confidentialité</div>
+    <div class="modal-date">Dernière mise à jour : avril 2026</div>
+    <div class="modal-toc">
+      <div class="modal-toc-title">// Sommaire</div>
+      <a href="#ml-editeur" onclick="scrollModalTo('ml-editeur')">Éditeur du site</a>
+      <a href="#ml-hebergeur" onclick="scrollModalTo('ml-hebergeur')">Hébergeur</a>
+      <a href="#ml-propriete" onclick="scrollModalTo('ml-propriete')">Propriété intellectuelle</a>
+      <a href="#ml-donnees" onclick="scrollModalTo('ml-donnees')">Données personnelles & RGPD</a>
+      <a href="#ml-cookies" onclick="scrollModalTo('ml-cookies')">Cookies</a>
+      <a href="#ml-droits" onclick="scrollModalTo('ml-droits')">Vos droits</a>
+    </div>
+    <div class="modal-section" id="ml-editeur">
+      <div class="modal-section-title">Éditeur du site</div>
+      <p>Le site est édité par :<br><strong>DomiTechPC Assistance</strong> – Entrepreneur individuel<br>SIRET : <strong>99059412900019</strong><br>Ville : <strong>Blois (41000)</strong><br>Téléphone : <strong>06 09 22 77 41</strong><br>Email : <strong>dtpc.assistance@gmail.com</strong></p>
+      <p>Activité : Dépannage informatique à domicile et développement web.</p>
+    </div>
+    <div class="modal-section" id="ml-hebergeur">
+      <div class="modal-section-title">Hébergeur</div>
+      <p><strong>GitHub, Inc.</strong><br>88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis<br>Service : GitHub Pages – <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a></p>
+    </div>
+    <div class="modal-section" id="ml-propriete">
+      <div class="modal-section-title">Propriété intellectuelle</div>
+      <p>L'ensemble des éléments constituant ce site (textes, graphismes, logo, code source) est la propriété exclusive de <strong>DomiTechPC Assistance</strong>. Toute reproduction sans autorisation écrite est interdite (articles L.335-2 et suivants du Code de la Propriété Intellectuelle).</p>
+      <p>DomiTechPC Assistance s'efforce de maintenir les informations publiées à jour mais ne peut garantir leur exhaustivité. Sa responsabilité ne saurait être engagée pour des dommages résultant de l'utilisation du site.</p>
+    </div>
+    <div class="modal-section" id="ml-donnees">
+      <div class="modal-section-title">Données personnelles & RGPD</div>
+      <p><strong>Responsable du traitement :</strong> DomiTechPC Assistance – dtpc.assistance@gmail.com</p>
+      <p><strong>Données collectées via le formulaire :</strong></p>
+      <ul>
+        <li>Nom et prénom, adresse e-mail, téléphone (facultatif)</li>
+        <li>Commune, service souhaité, contenu du message</li>
+      </ul>
+      <p><strong>Finalité :</strong> Répondre à vos demandes de contact et d'intervention.<br><strong>Base légale :</strong> Intérêt légitime et consentement.<br><strong>Durée de conservation :</strong> 3 ans maximum après le dernier contact.</p>
+      <p><strong>Destinataires :</strong> Données transmises via <strong>Formspree</strong> et reçues uniquement par DomiTechPC Assistance. Pas de vente ni partage commercial. Formspree et GitHub Pages sont des services américains encadrés par des clauses contractuelles types.</p>
+    </div>
+    <div class="modal-section" id="ml-cookies">
+      <div class="modal-section-title">Cookies</div>
+      <p>Ce site utilise uniquement :</p>
+      <ul>
+        <li><strong>Cookie de préférence cookies</strong> : mémorise votre choix (durée : 12 mois)</li>
+        <li><strong>Google Fonts</strong> : chargement de polices — pas de données personnelles exploitées à des fins publicitaires</li>
+      </ul>
+      <p>Aucun cookie de tracking ni de publicité. Vous pouvez modifier vos préférences à tout moment via le lien « Cookies » en bas de page, ou en supprimant les cookies depuis votre navigateur.</p>
+    </div>
+    <div class="modal-section" id="ml-droits">
+      <div class="modal-section-title">Vos droits</div>
+      <p>Conformément au RGPD, vous disposez des droits d'accès, rectification, effacement, limitation, opposition et portabilité. Pour les exercer : <a href="mailto:dtpc.assistance@gmail.com">dtpc.assistance@gmail.com</a> – réponse sous 1 mois.</p>
+      <p>En cas de litige : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CGV -->
+<div class="modal-overlay" id="modalCGV" onclick="closeModalOutside(event, 'modalCGV')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalCGV')">✕</button>
+    <div class="modal-tag">Contractuel</div>
+    <div class="modal-h1">Conditions Générales<br>de Vente</div>
+    <div class="modal-date">En vigueur depuis avril 2026 – Version 1.0</div>
+    <div class="modal-toc">
+      <div class="modal-toc-title">// Sommaire</div>
+      <a href="#cgv-champ" onclick="scrollModalTo('cgv-champ')">Champ d'application</a>
+      <a href="#cgv-prestations" onclick="scrollModalTo('cgv-prestations')">Prestations proposées</a>
+      <a href="#cgv-tarifs" onclick="scrollModalTo('cgv-tarifs')">Tarifs</a>
+      <a href="#cgv-devis" onclick="scrollModalTo('cgv-devis')">Devis & commande</a>
+      <a href="#cgv-paiement" onclick="scrollModalTo('cgv-paiement')">Modalités de paiement</a>
+      <a href="#cgv-garantie" onclick="scrollModalTo('cgv-garantie')">Garantie & responsabilité</a>
+      <a href="#cgv-retractation" onclick="scrollModalTo('cgv-retractation')">Droit de rétractation</a>
+      <a href="#cgv-litiges" onclick="scrollModalTo('cgv-litiges')">Litiges</a>
+    </div>
+    <div class="modal-section" id="cgv-champ">
+      <div class="modal-section-title">Champ d'application</div>
+      <p>Les présentes CGV s'appliquent à toutes les prestations conclues entre <strong>DomiTechPC Assistance</strong> (SIRET 99059412900019, Blois) et tout Client souhaitant bénéficier de ses services. Toute commande implique l'acceptation sans réserve des présentes CGV.</p>
+    </div>
+    <div class="modal-section" id="cgv-prestations">
+      <div class="modal-section-title">Prestations proposées</div>
+      <ul>
+        <li>Dépannage informatique (PC, Mac, périphériques)</li>
+        <li>Maintenance préventive (nettoyage, optimisation, mises à jour)</li>
+        <li>Installation & configuration (logiciels, OS, imprimantes)</li>
+        <li>Réseau & Wi-Fi (installation, sécurisation, extension)</li>
+        <li>Récupération de données sur supports défaillants</li>
+        <li>Développement web (sites vitrines, landing pages)</li>
+        <li>Formation (initiation informatique, sécurité numérique)</li>
+      </ul>
+      <p>Interventions <strong>à domicile</strong> (Blois, Orléans, Tours, Montluçon) ou <strong>à distance</strong> via prise en main sécurisée.</p>
+    </div>
+    <div class="modal-section" id="cgv-tarifs">
+      <div class="modal-section-title">Tarifs</div>
+      <p>Tarifs en euros TTC. En tant que micro-entrepreneur bénéficiant de la franchise de TVA (art. 293 B CGI), <strong>aucune TVA n'est applicable</strong>.</p>
+      <div class="tarif-grid-m">
+        <div class="tarif-card-m"><div class="tarif-label-m">Domicile</div><div class="tarif-price-m">40€<span style="font-size:11px;color:var(--text3)">/h</span></div><div class="tarif-desc-m">Dépannage & maintenance</div></div>
+        <div class="tarif-card-m"><div class="tarif-label-m">À distance</div><div class="tarif-price-m">30€<span style="font-size:11px;color:var(--text3)">/h</span></div><div class="tarif-desc-m">Télémaintenance sécurisée</div></div>
+        <div class="tarif-card-m"><div class="tarif-label-m">Déplacement</div><div class="tarif-price-m">Inclus</div><div class="tarif-desc-m">Zone Blois ~20 km</div></div>
+        <div class="tarif-card-m"><div class="tarif-label-m">Dev web</div><div class="tarif-price-m">Sur devis</div><div class="tarif-desc-m">Selon cahier des charges</div></div>
+      </div>
+      <div class="alert-box-m">⚠ Tarifs susceptibles d'évoluer. Le tarif applicable est celui communiqué lors du devis.</div>
+    </div>
+    <div class="modal-section" id="cgv-devis">
+      <div class="modal-section-title">Devis & commande</div>
+      <p>Pour toute prestation dépassant <strong>150 €</strong>, un devis écrit est établi, valable <strong>30 jours</strong>. La commande est ferme à compter de la validation écrite du devis par le Client. Pour les interventions ponctuelles de faible durée, un accord verbal préalable suffit.</p>
+    </div>
+    <div class="modal-section" id="cgv-paiement">
+      <div class="modal-section-title">Modalités de paiement</div>
+      <p>Règlement à l'issue de l'intervention ou à la livraison du projet. <strong>Moyens acceptés :</strong> espèces, virement bancaire, chèque, PayPal (sur demande). Pour les projets web, un acompte de <strong>30 %</strong> peut être demandé à la commande.</p>
+      <p>Tout retard de paiement entraîne des pénalités au taux légal en vigueur et une indemnité forfaitaire de 40 € pour frais de recouvrement (art. L.441-10 C. com.).</p>
+    </div>
+    <div class="modal-section" id="cgv-garantie">
+      <div class="modal-section-title">Garantie & responsabilité</div>
+      <p>Les interventions bénéficient d'une <strong>garantie de 30 jours</strong> sur la résolution effectuée. Elle ne couvre pas les pannes matérielles postérieures, les dommages liés à une mauvaise utilisation, les infections virales ultérieures ni la perte de données (le Client est seul responsable de ses sauvegardes).</p>
+      <p>La responsabilité du Prestataire est limitée au montant de la prestation. <strong>Récupération de données :</strong> prestation en mode « meilleur effort », un forfait de diagnostic peut s'appliquer même en cas d'échec.</p>
+    </div>
+    <div class="modal-section" id="cgv-retractation">
+      <div class="modal-section-title">Droit de rétractation</div>
+      <p>Conformément à l'art. L.221-18 C. conso., le Client particulier dispose de <strong>14 jours</strong> pour se rétracter sans motif. En cas d'intervention réalisée à sa demande expresse avant ce délai, il devra régler le service déjà effectué au prorata du temps passé.</p>
+      <p>Pour exercer ce droit : <a href="mailto:dtpc.assistance@gmail.com">dtpc.assistance@gmail.com</a> ou 06 09 22 77 41.</p>
+    </div>
+    <div class="modal-section" id="cgv-litiges">
+      <div class="modal-section-title">Litiges</div>
+      <p>En cas de litige, une solution amiable sera recherchée en priorité. Le Client peut recourir gratuitement au médiateur <strong>MEDICYS</strong> (<a href="https://www.medicys.fr" target="_blank" rel="noopener">medicys.fr</a>). À défaut, les tribunaux de <strong>Blois</strong> seront compétents. CGV soumises au <strong>droit français</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* FADE UP */
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+  /* HAMBURGER */
+  function toggleMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn = document.getElementById('hamburger');
+    if (menu.classList.contains('open')) {
+      closeMobileMenu();
+    } else {
+      menu.style.display = 'flex';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          menu.classList.add('open');
+          btn.classList.add('open');
+        });
+      });
+    }
+  }
+  function closeMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn = document.getElementById('hamburger');
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    setTimeout(function() { menu.style.display = 'none'; }, 350);
+  }
+
+  /* COPY EMAIL */
+  function copyEmail() {
+    var email = 'dtpc.assistance@gmail.com';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(showCopyToast);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = email;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showCopyToast(); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  function showCopyToast() {
+    var toast = document.getElementById('copyToast');
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2400);
+  }
+
+  /* FORMSPREE */
+  async function envoyerFormulaire() {
+    var btn = document.getElementById('submit-btn');
+    var msg = document.getElementById('form-message');
+    var prenom = document.getElementById('prenom').value.trim();
+    var email = document.getElementById('email').value.trim();
+
+    msg.style.display = 'none';
+    msg.className = '';
+
+    if (!prenom || !email) {
+      msg.style.display = 'block';
+      msg.classList.add('error');
+      msg.textContent = '⚠ Merci de renseigner au minimum votre prénom et votre e-mail.';
+      return;
+    }
+
+    btn.classList.add('sending');
+    btn.disabled = true;
+
+    var data = {
+      prenom: prenom,
+      telephone: document.getElementById('telephone').value,
+      email: email,
+      prestation: document.getElementById('prestation').value,
+      commune: document.getElementById('commune').value,
+      message: document.getElementById('message').value
+    };
+
+    try {
+      var res = await fetch('https://formspree.io/f/mnjojknk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      btn.classList.remove('sending');
+      if (res.ok) {
+        msg.style.display = 'block';
+        msg.classList.add('success');
+        msg.textContent = '✓ Votre demande a bien été envoyée !';
+        btn.querySelector('.btn-text').textContent = 'Message envoyé ✓';
+        btn.disabled = true;
+        setTimeout(function() {
+          document.getElementById('prenom').value = '';
+          document.getElementById('telephone').value = '';
+          document.getElementById('email').value = '';
+          document.getElementById('prestation').value = '';
+          document.getElementById('commune').value = '';
+          document.getElementById('message').value = '';
+          msg.style.display = 'none';
+          msg.className = '';
+          btn.querySelector('.btn-text').textContent = '→ Envoyer ma demande';
+          btn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error('erreur');
+      }
+    } catch(err) {
+      btn.classList.remove('sending');
+      msg.style.display = 'block';
+      msg.classList.add('error');
+      msg.textContent = '⚠ Une erreur est survenue. Veuillez réessayer ou nous contacter directement.';
+      btn.disabled = false;
+    }
+  }
+
+  /* ===== COOKIE BANNER ===== */
+  (function() {
+    var consent = localStorage.getItem('dtpc_cookie_consent');
+    if (!consent) {
+      var banner = document.getElementById('cookieBanner');
+      if (banner) banner.style.display = 'block';
+    }
+  })();
+  function acceptCookies() { localStorage.setItem('dtpc_cookie_consent','accepted'); hideCookieBanner(); }
+  function refuseCookies() { localStorage.setItem('dtpc_cookie_consent','refused'); hideCookieBanner(); }
+  function hideCookieBanner() {
+    var b = document.getElementById('cookieBanner');
+    if (b) { b.style.transition='opacity .3s,transform .3s'; b.style.opacity='0'; b.style.transform='translateY(100%)'; setTimeout(function(){b.style.display='none';},300); }
+  }
+  function resetCookieConsent() { localStorage.removeItem('dtpc_cookie_consent'); location.reload(); }
+
+  /* ===== MODALS ===== */
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (m) { m.classList.add('open'); document.body.style.overflow='hidden'; }
+  }
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (m) { m.classList.remove('open'); document.body.style.overflow=''; }
+  }
+  function closeModalOutside(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+  function scrollModalTo(anchorId) {
+    var el = document.getElementById(anchorId);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    return false;
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(function(m){ m.classList.remove('open'); });
+      document.body.style.overflow='';
+    }
+  });
+
+</script>
+
+</body>
+</html>
