@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){
+  var h = document.documentElement;
+  try{
+    var t = localStorage.getItem('dtpc-theme');
+    if(!t){ t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; }
+    if(t === 'light'){ h.setAttribute('data-theme','light'); }
+  }catch(e){}
+  // Active le masquage des blocs "reveal au scroll" seulement si JS tourne.
+  h.className += (h.className ? ' ' : '') + 'js-reveal';
+  // Detection tactile fiable, independante des media queries : certains
+  // navigateurs integres declarent (hover:hover) a tort. Posee ici, avant le
+  // premier rendu, pour qu'aucun etat de survol ne s'applique au doigt.
+  if (navigator.maxTouchPoints > 0 || 'ontouchstart' in window) {
+    h.className += ' is-touch';
+  }
+  // Filet de securite : si main.js n'a pas demarre au bout de 2,5 s
+  // (reseau lent, 404, blocage), on affiche tout plutot que de laisser une page vide.
+  setTimeout(function(){
+    if(!window.__dtpcReady) h.className = h.className.replace(/\bjs-reveal\b/, '');
+  }, 2500);
+})();
+</script>
+<meta name="description" content="FAQ DomiTechPC : tarifs, délais, garantie, récupération de données, sites web. Les réponses aux questions fréquentes sur le dépannage informatique à domicile à Blois.">
+<title>FAQ – Questions fréquentes | DomiTechPC Blois</title>
+<link rel="canonical" href="https://www.domitechpc.fr/faq-blois.html">
+<link rel="icon" type="image/png" href="/favicon.png" sizes="48x48">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<link rel="preload" href="/assets/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/dm-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css?v=118">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Où intervenez-vous, et dois-je apporter mon ordinateur ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "J'interviens directement à votre domicile, sur Blois et dans un rayon d'environ 20 km (La Chaussée-Saint-Victor, Saint-Gervais-la-Forêt, Vineuil, Villebarou…). Vous n'avez rien à débrancher ni à transporter. Le déplacement n'est pas inclus dans les tarifs affichés."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sous quel délai pouvez-vous intervenir ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Je réponds à toute demande en moins de 2 heures, du lundi au dimanche de 8 h à 22 h. Nous fixons ensuite ensemble l'heure du rendez-vous."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Travaillez-vous sur Mac comme sur PC ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui : je dépanne les PC sous Windows 10/11 et les Mac sous macOS (diagnostic, mises à jour, réinstallation propre)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un diagnostic ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le diagnostic est à 45 €. Il est déduit si vous validez une réparation dans la foulée. Je vous explique ensuite clairement ce qui ne va pas et le coût de la solution, avant de commencer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont vos tarifs de dépannage ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Montage d'une pièce (SSD, RAM, etc..) dès 49 €, forfait nettoyage / virus dès 79 €, réinstallation de Windows dès 89 €, récupération de données dès 59 € selon le volume. Retrouvez la grille complète sur la page Tarifs. Les prix sont en euros TTC : en tant que micro-entrepreneur en franchise de TVA (art. 293 B du CGI), aucune TVA n'est applicable. Le déplacement n'est pas inclus, et les tarifs vous sont communiqués avant toute intervention."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le devis est-il gratuit ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, le devis est gratuit et sans engagement. Pour toute prestation dépassant 150 €, un devis écrit est établi, valable 30 jours. Pour un site web ou un outil métier, il vous est remis sous 48 h après notre premier échange. Vous pouvez le demander via le formulaire du site, par téléphone au 06 95 50 70 97 ou par e-mail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment et quand puis-je payer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le règlement se fait à l'issue de l'intervention, ou à la livraison du projet pour un site web. Moyens acceptés : espèces, virement bancaire, chèque, et PayPal sur demande. Pour les projets web, un acompte de 30 % est prévu à la commande."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mon PC est lent ou infecté : que comprend le nettoyage ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Suppression des fichiers temporaires et des programmes inutiles, analyse et suppression des virus et malwares, vérification du pare-feu et de l'antivirus, sécurisation des mots de passe et des accès sensibles, et conseils pour éviter la réinfection. Le forfait démarre à 79 € : le prix précis vous est donné après un diagnostic rapide, selon l'état du PC."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mon PC ne démarre plus : que dois-je faire ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Éteignez-le et n'insistez pas : sur un support défaillant, chaque utilisation réduit les chances de récupérer vos fichiers. Contactez-moi : je pose un diagnostic et, si nécessaire, j'extrais vos données avant toute réparation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Une réinstallation de Windows efface-t-elle mes fichiers ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Une réinstallation propre repart d'un système vierge. Si vous avez des fichiers à conserver, prévenez-moi avant l'intervention pour que nous prévoyions leur sauvegarde : c'est la prestation de récupération de données, qui s'ajoute à la réinstallation (dès 89 €)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vos interventions sont-elles garanties ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui : 30 jours de garantie sur la résolution effectuée. Elle ne couvre pas les pannes matérielles postérieures, les dommages liés à une mauvaise utilisation, les infections virales ultérieures ni la perte de données."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que pouvez-vous récupérer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les données des disques durs internes et externes (HDD, SSD), des clés USB et des cartes mémoire, les fichiers supprimés (y compris après vidage de la corbeille), les partitions formatées ou corrompues, et les données d'un PC qui ne démarre plus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Êtes-vous sûr de récupérer mes données, et à quel prix ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aucun résultat ne peut être garanti : la récupération de données est une prestation en « meilleur effort ». Je vous indique honnêtement mes chances de réussite avant d'intervenir. Côté tarif : 59 € jusqu'à 250 Go, 79 € jusqu'à 500 Go, 99 € jusqu'à 1 To."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un site internet ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Site vitrine dès 300 €, site personnalisé dès 800 €, refonte graphique d'un site existant sur devis, maintenance et hébergement dès 19 €/mois. Le tarif varie selon la complexité du projet (nombre de pages, fonctionnalités, formulaires). Le devis détaillé vous est remis sous 48 h après notre premier échange."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle différence entre un site vitrine et un site personnalisé ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le site vitrine présente clairement votre activité. Le site personnalisé part d'une feuille blanche : votre activité, votre positionnement et votre clientèle définissent le design, la structure et les fonctionnalités (prise de rendez-vous, catalogue, espace client…), plutôt qu'un modèle générique."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le site m'appartient-il ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, le résultat final vous appartient entièrement, sans abonnement forcé à une plateforme tierce. La maintenance et l'hébergement (dès 19 €/mois) sont proposés si vous en avez besoin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que sont les applications et outils métier ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "De petites applications sur mesure pour digitaliser votre activité sans logiciel générique trop lourd : CRM simplifié, planning, stock, facturation, formulaires, automatisations, tableaux de bord. Chaque outil est conçu sur devis, par étapes, avec des points de validation réguliers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je me rétracter ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un client particulier dispose de 14 jours pour se rétracter sans motif, avec deux exceptions : les dépannages urgents à domicile expressément demandés, et les prestations dont vous demandez l'exécution immédiate par écrit (bon d'intervention signé) une fois pleinement exécutées. Le détail figure dans les CGV, accessibles en bas de la page d'accueil. Pour exercer ce droit : dtpc.assistance@gmail.com ou 06 95 50 70 97."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que deviennent les informations que j'envoie via le formulaire ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Elles servent uniquement à répondre à votre demande et sont conservées 3 ans maximum après le dernier contact. Elles ne sont ni vendues ni partagées commercialement, et le site ne dépose aucun cookie ni outil de suivi. Vous pouvez exercer vos droits (accès, rectification, effacement…) en écrivant à dtpc.assistance@gmail.com."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://www.domitechpc.fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "FAQ",
+      "item": "https://www.domitechpc.fr/faq-blois.html"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
+
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-head">
+    <div class="mm-brand">
+      <span class="mm-brand-chip logo-glyph">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <rect class="lg-bg" x="1.5" y="1.5" width="45" height="45" rx="10.56" stroke-width="1.3"/>
+          <path class="lg-mark" d="M16.32 13.92 L26.4 24 L16.32 34.08" fill="none" stroke-width="5.28" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect class="lg-cursor" x="28.32" y="29.95" width="10.56" height="5.28" rx="2.64"/>
+        </svg>
+      </span>
+      <div class="mm-brand-text">
+        <span class="logo-text-mobile">DomiTech<strong>PC</strong></span>
+        <span class="mm-brand-sub">Dépannage & dev web — Blois</span>
+      </div>
+    </div>
+    <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Fermer"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav class="mm-links">
+    <a class="mm-link mm-services-trigger" id="mmServicesTrigger" role="button" tabindex="0" aria-expanded="false" aria-controls="mmSubServices" onclick="toggleMobileServices()"><span class="mm-label">Services</span><svg class="mm-services-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+    <div class="mm-submenu" id="mmSubServices"><div class="mm-submenu-inner">
+          <a href="/depannage-informatique-blois.html" onclick="closeMobileMenu()">Dépannage informatique</a>
+          <a href="/recuperation-donnees-blois.html" onclick="closeMobileMenu()">Récupération de données</a>
+          <a href="/nettoyage-securite-pc-blois.html" onclick="closeMobileMenu()">Nettoyage & Sécurité</a>
+          <a href="/developpement-web-blois.html" onclick="closeMobileMenu()">Développement web</a>
+          <a href="/creation-site-internet-blois.html" onclick="closeMobileMenu()">Site web personnalisé</a>
+          <a href="/applications-metier-blois.html" onclick="closeMobileMenu()">Applications & outils métier</a>
+    </div></div>
+    <a href="/index.html#tarifs" class="mm-link" onclick="closeMobileMenu()"><span class="mm-label">Tarifs</span><span class="mm-arrow">→</span></a>
+    <a href="/index.html#avis" class="mm-link" onclick="closeMobileMenu()"><span class="mm-label">Avis</span><span class="mm-arrow">→</span></a>
+    <a href="/index.html#contact" class="mm-link" onclick="closeMobileMenu()"><span class="mm-label">Contact</span><span class="mm-arrow">→</span></a>
+  </nav>
+  <div class="mm-foot">
+    <div class="mm-foot-row">
+      <a href="tel:+33695507097" class="mm-quick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 06 95 50 70 97</a>
+      <a href="#" class="mm-quick" onclick="event.preventDefault();copyEmail()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7 12 13 2 7"/></svg> Email</a>
+    </div>
+  </div>
+</div>
+
+<div class="copy-toast" id="copyToast" style="display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-1px;margin-right:2px"><polyline points="20 6 9 17 4 12"/></svg> E-mail copié !</div>
+
+<div class="nav-outer">
+  <nav>
+    <a href="/index.html" class="logo">
+      <span class="logo-glyph">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <rect class="lg-bg" x="1.5" y="1.5" width="45" height="45" rx="10.56" stroke-width="1.3"/>
+          <path class="lg-mark" d="M16.32 13.92 L26.4 24 L16.32 34.08" fill="none" stroke-width="5.28" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect class="lg-cursor" x="28.32" y="29.95" width="10.56" height="5.28" rx="2.64"/>
+        </svg>
+      </span>
+      <span class="logo-text">DomiTech<strong>PC</strong><span style="color:var(--text3)"> // Assistance</span></span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-item-dd">
+        <span class="nav-dd-trigger" tabindex="0">services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        <div class="nav-dropdown">
+        <a href="/depannage-informatique-blois.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Dépannage informatique</a>
+        <a href="/recuperation-donnees-blois.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Récupération de données</a>
+        <a href="/nettoyage-securite-pc-blois.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Nettoyage & Sécurité</a>
+        <a href="/developpement-web-blois.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Développement web</a>
+        <a href="/creation-site-internet-blois.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Site web personnalisé</a>
+        <a href="/applications-metier-blois.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>Applications & outils métier</a>
+        </div>
+      </div>
+      <a href="/index.html#tarifs">tarifs</a>
+      <a href="/index.html#avis">avis</a>
+      <a href="/index.html#contact">contact</a>
+      <a href="/index.html#devis-form" class="nav-cta">→ Devis gratuit</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Activer le thème clair" onclick="toggleTheme()">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb rise-in">
+    <a href="/index.html">Accueil</a><span class="sep">/</span><span class="current">FAQ</span>
+  </div>
+
+  <section class="svc-hero svc-hero--single svc-hero--faq rise-in rise-in--d1">
+    <div class="hero-text">
+      <span class="hero-kicker hero-kicker--center">FAQ</span>
+      <h1 class="svc-h1 svc-h1--faq">Questions <span class="glow">fréquentes</span></h1>
+      <p class="svc-lede">Tarifs, délais, garantie, récupération de données, sites web… les réponses aux questions que l'on me pose le plus souvent. Une autre question ? Appelez-moi ou écrivez-moi, je réponds en moins de 2 h.</p>
+      <div class="cta-group">
+        <a href="/index.html#devis-form" class="btn-primary"><span>Demander un devis</span><span class="arrow">→</span></a>
+        <a href="tel:+33695507097" class="btn-ghost">06 95 50 70 97</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="section-band">
+  <div class="wrap">
+    <div class="svc-body svc-body--full faq">
+      <h2>Intervention à domicile</h2>
+      <details class="faq-item"><summary class="faq-q">Où intervenez-vous, et dois-je apporter mon ordinateur ?</summary><div class="faq-a"><p>J'interviens directement à votre domicile, sur Blois et dans un rayon d'environ 20 km (La Chaussée-Saint-Victor, Saint-Gervais-la-Forêt, Vineuil, Villebarou…). Vous n'avez rien à débrancher ni à transporter. Le déplacement n'est pas inclus dans les tarifs affichés.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Sous quel délai pouvez-vous intervenir ?</summary><div class="faq-a"><p>Je réponds à toute demande en moins de 2 heures, du lundi au dimanche de 8 h à 22 h. Nous fixons ensuite ensemble l'heure du rendez-vous.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Travaillez-vous sur Mac comme sur PC ?</summary><div class="faq-a"><p>Oui : je dépanne les PC sous Windows 10/11 et les Mac sous macOS (diagnostic, mises à jour, réinstallation propre).</p></div></details>
+      <h2>Tarifs &amp; paiement</h2>
+      <details class="faq-item"><summary class="faq-q">Combien coûte un diagnostic ?</summary><div class="faq-a"><p>Le diagnostic est à 45 €. Il est déduit si vous validez une réparation dans la foulée. Je vous explique ensuite clairement ce qui ne va pas et le coût de la solution, avant de commencer.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Quels sont vos tarifs de dépannage ?</summary><div class="faq-a"><p>Montage d'une pièce (SSD, RAM, etc..) dès 49 €, forfait nettoyage / virus dès 79 €, réinstallation de Windows dès 89 €, récupération de données dès 59 € selon le volume. Retrouvez la grille complète sur la <a href="/index.html#tarifs">page Tarifs</a>. Les prix sont en euros TTC : en tant que micro-entrepreneur en franchise de TVA (art. 293 B du CGI), aucune TVA n'est applicable. Le déplacement n'est pas inclus, et les tarifs vous sont communiqués avant toute intervention.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Le devis est-il gratuit ?</summary><div class="faq-a"><p>Oui, le devis est gratuit et sans engagement. Pour toute prestation dépassant 150 €, un devis écrit est établi, valable 30 jours. Pour un site web ou un outil métier, il vous est remis sous 48 h après notre premier échange. Vous pouvez le demander via le <a href="/index.html#devis-form">formulaire du site</a>, par téléphone au 06 95 50 70 97 ou par e-mail.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Comment et quand puis-je payer ?</summary><div class="faq-a"><p>Le règlement se fait à l'issue de l'intervention, ou à la livraison du projet pour un site web. Moyens acceptés : espèces, virement bancaire, chèque, et PayPal sur demande. Pour les projets web, un acompte de 30 % est prévu à la commande.</p></div></details>
+      <h2>Dépannage &amp; sécurité</h2>
+      <details class="faq-item"><summary class="faq-q">Mon PC est lent ou infecté : que comprend le nettoyage ?</summary><div class="faq-a"><p>Suppression des fichiers temporaires et des programmes inutiles, analyse et suppression des virus et malwares, vérification du pare-feu et de l'antivirus, sécurisation des mots de passe et des accès sensibles, et conseils pour éviter la réinfection. Le forfait démarre à 79 € : le prix précis vous est donné après un diagnostic rapide, selon l'état du PC.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Mon PC ne démarre plus : que dois-je faire ?</summary><div class="faq-a"><p>Éteignez-le et n'insistez pas : sur un support défaillant, chaque utilisation réduit les chances de récupérer vos fichiers. Contactez-moi : je pose un diagnostic et, si nécessaire, j'extrais vos données avant toute réparation.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Une réinstallation de Windows efface-t-elle mes fichiers ?</summary><div class="faq-a"><p>Une réinstallation propre repart d'un système vierge. Si vous avez des fichiers à conserver, prévenez-moi avant l'intervention pour que nous prévoyions leur sauvegarde : c'est la prestation de récupération de données, qui s'ajoute à la réinstallation (dès 89 €).</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Vos interventions sont-elles garanties ?</summary><div class="faq-a"><p>Oui : 30 jours de garantie sur la résolution effectuée. Elle ne couvre pas les pannes matérielles postérieures, les dommages liés à une mauvaise utilisation, les infections virales ultérieures ni la perte de données.</p></div></details>
+      <h2>Récupération de données</h2>
+      <details class="faq-item"><summary class="faq-q">Que pouvez-vous récupérer ?</summary><div class="faq-a"><p>Les données des disques durs internes et externes (HDD, SSD), des clés USB et des cartes mémoire, les fichiers supprimés (y compris après vidage de la corbeille), les partitions formatées ou corrompues, et les données d'un PC qui ne démarre plus.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Êtes-vous sûr de récupérer mes données, et à quel prix ?</summary><div class="faq-a"><p>Aucun résultat ne peut être garanti : la récupération de données est une prestation en « meilleur effort ». Je vous indique honnêtement mes chances de réussite avant d'intervenir. Côté tarif : 59 € jusqu'à 250 Go, 79 € jusqu'à 500 Go, 99 € jusqu'à 1 To.</p></div></details>
+      <h2>Sites web &amp; outils métier</h2>
+      <details class="faq-item"><summary class="faq-q">Combien coûte un site internet ?</summary><div class="faq-a"><p>Site vitrine dès 300 €, site personnalisé dès 800 €, refonte graphique d'un site existant sur devis, maintenance et hébergement dès 19 €/mois. Le tarif varie selon la complexité du projet (nombre de pages, fonctionnalités, formulaires). Le devis détaillé vous est remis sous 48 h après notre premier échange.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Quelle différence entre un site vitrine et un site personnalisé ?</summary><div class="faq-a"><p>Le site vitrine présente clairement votre activité. Le site personnalisé part d'une feuille blanche : votre activité, votre positionnement et votre clientèle définissent le design, la structure et les fonctionnalités (prise de rendez-vous, catalogue, espace client…), plutôt qu'un modèle générique.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Le site m'appartient-il ?</summary><div class="faq-a"><p>Oui, le résultat final vous appartient entièrement, sans abonnement forcé à une plateforme tierce. La maintenance et l'hébergement (dès 19 €/mois) sont proposés si vous en avez besoin.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Que sont les applications et outils métier ?</summary><div class="faq-a"><p>De petites applications sur mesure pour digitaliser votre activité sans logiciel générique trop lourd : CRM simplifié, planning, stock, facturation, formulaires, automatisations, tableaux de bord. Chaque outil est conçu sur devis, par étapes, avec des points de validation réguliers.</p></div></details>
+      <h2>Vos droits &amp; vos données</h2>
+      <details class="faq-item"><summary class="faq-q">Puis-je me rétracter ?</summary><div class="faq-a"><p>Un client particulier dispose de 14 jours pour se rétracter sans motif, avec deux exceptions : les dépannages urgents à domicile expressément demandés, et les prestations dont vous demandez l'exécution immédiate par écrit (bon d'intervention signé) une fois pleinement exécutées. Le détail figure dans les CGV, accessibles en bas de la page d'accueil. Pour exercer ce droit : dtpc.assistance@gmail.com ou 06 95 50 70 97.</p></div></details>
+      <details class="faq-item"><summary class="faq-q">Que deviennent les informations que j'envoie via le formulaire ?</summary><div class="faq-a"><p>Elles servent uniquement à répondre à votre demande et sont conservées 3 ans maximum après le dernier contact. Elles ne sont ni vendues ni partagées commercialement, et le site ne dépose aucun cookie ni outil de suivi. Vous pouvez exercer vos droits (accès, rectification, effacement…) en écrivant à dtpc.assistance@gmail.com.</p></div></details>
+    </div>
+  </div>
+</div>
+
+<a href="/index.html#devis-form" class="fab-devis" id="fabDevis"><span class="d"></span> Devis gratuit →</a>
+
+<div class="footer-outer">
+  <footer>
+    <div class="foot-brand"><span>DomiTech<strong>PC</strong> · SIRET 99059412900027</span></div>
+    <div class="foot-mid">&copy; 2026 — Expert en dépannage informatique</div>
+    <div class="foot-links">
+      <a href="/index.html#mentions-legales">Mentions légales</a>
+      <a href="/index.html#cgv">CGV</a>
+    </div>
+  </footer>
+</div>
+
+<script src="/assets/main.js?v=113"></script>
+</body>
+</html>
