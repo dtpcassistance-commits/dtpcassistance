@@ -1,6 +1,7 @@
   window.__dtpcReady = true;
   const scrollBar = document.getElementById('scrollBar');
   const fab = document.getElementById('fabDevis');
+  const navOuter = document.querySelector('.nav-outer');
   function updateScrollUI() {
     const h = document.documentElement;
     const scrolled = h.scrollTop;
@@ -9,6 +10,7 @@
     scrollBar.style.width = pct + '%';
     if (scrolled > 600 && pct < 92) fab.classList.add('show');
     else fab.classList.remove('show');
+    if (navOuter) navOuter.classList.toggle('is-scrolled', scrolled > 20);
   }
   window.addEventListener('scroll', updateScrollUI, { passive: true });
   updateScrollUI();
